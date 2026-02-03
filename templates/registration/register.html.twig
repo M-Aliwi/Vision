@@ -3,25 +3,51 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <div class="container">
-    <h2>Register</h2>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-body p-4">
+                        <h1 class="h3 mb-4 text-center">Create an Account</h1>
 
-    {{ form_errors(registrationForm) }}
+                        {{ form_errors(registrationForm) }}
 
-    {{ form_start(registrationForm) }}
-    <div class="row">
-        <div class="col-6">
-            {{ form_row(registrationForm.email) }}
-        </div>
-    </div>
-        <div class="col-6">
-            {{ form_row(registrationForm.plainPassword, { label: 'Password'}) }}
-        </div>
-        <div class="col-6">
-            {{ form_row(registrationForm.agreeTerms) }}
-        </div>
+                        {{ form_start(registrationForm) }}
+                            <div class="mb-3">
+                                {{ form_row(registrationForm.email, {
+                                    'attr': {'class': 'form-control'},
+                                    'label_attr': {'class': 'form-label'}
+                                }) }}
+                            </div>
 
-    <button type="submit" class="btn btn-dark">Register</button>
-    {{ form_end(registrationForm) }}
+                            <div class="mb-3">
+                                {{ form_row(registrationForm.plainPassword, {
+                                    'label': 'Password',
+                                    'attr': {'class': 'form-control'},
+                                    'label_attr': {'class': 'form-label'}
+                                }) }}
+                            </div>
+
+                            <div class="mb-4">
+                                {{ form_row(registrationForm.agreeTerms, {
+                                    'label_attr': {'class': 'form-check-label'},
+                                    'attr': {'class': 'form-check-input'}
+                                }) }}
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                            </div>
+
+                            <div class="text-center mt-3">
+                                <p class="mb-0">Already have an account? 
+                                    <a href="{{ path('app_login') }}" class="text-decoration-none">Sign in here</a>
+                                </p>
+                            </div>
+                        {{ form_end(registrationForm) }}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

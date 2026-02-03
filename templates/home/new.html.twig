@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create New Pin | Vision{% endblock %}
+
+{% block body %}
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-body p-4">
+                        <h1 class="h3 mb-4 text-center">Create a New Pin</h1>
+                        
+                        {{ form_start(form) }}
+                            <div class="mb-3">
+                                {{ form_row(form.discription, {
+                                    'attr': {'class': 'form-control'},
+                                    'label_attr': {'class': 'form-label'}
+                                }) }}
+                            </div>
+
+                            <div class="mb-4">
+                                {{ form_row(form.image, {
+                                    'attr': {'class': 'form-control'},
+                                    'label_attr': {'class': 'form-label'}
+                                }) }}
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary btn-lg" type="submit">
+                                    <i class="bi bi-cloud-upload me-2"></i>Upload Pin
+                                </button>
+                            </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %} 

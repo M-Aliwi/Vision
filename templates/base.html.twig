@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
         {% block stylesheets %}
         {% endblock %}
 
@@ -12,24 +13,200 @@
         {% endblock %}
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+        <style>
+            html, body {
+                height: 100%;
+            }
+            body {
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
+            .container {
+                flex: 1 0 auto;
+            }
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100vh;
+                width: 250px;
+                background: #343a40;
+                color: #fff;
+                transition: transform 0.3s ease;
+                z-index: 1000;
+                transform: translateX(0);
+            }
+            .sidebar.collapsed {
+                transform: translateX(-250px);
+            }
+            .sidebar-header {
+                padding: 1rem;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            .sidebar-header h1 {
+                margin: 0;
+                font-size: 1.5rem;
+                color: #fff;
+            }
+            .sidebar-toggle {
+                background: none;
+                border: none;
+                color: #fff;
+                font-size: 1.5rem;
+                cursor: pointer;
+                padding: 0.5rem;
+            }
+            .sidebar-nav {
+                padding: 1rem 0;
+            }
+            .sidebar-nav .nav-link {
+                color: #fff;
+                padding: 0.8rem 1rem;
+                display: flex;
+                align-items: center;
+                transition: background-color 0.2s;
+            }
+            .sidebar-nav .nav-link:hover {
+                background-color: rgba(255,255,255,0.1);
+            }
+            .sidebar-nav .nav-link i {
+                margin-right: 0.5rem;
+            }
+            .main-content {
+                margin-left: 250px;
+                transition: margin-left 0.3s ease;
+                width: calc(100% - 250px);
+            }
+            .main-content.expanded {
+                margin-left: 0;
+                width: 100%;
+            }
+            footer {
+                flex-shrink: 0;
+                width: 100%;
+                background: #343a40;
+                color: #fff;
+                padding-top: 2em;
+                padding-bottom: 2em;
+            }
+            @media (max-width: 768px) {
+                .sidebar {
+                    transform: translateX(-250px);
+                }
+                .sidebar.expanded {
+                    transform: translateX(0);
+                }
+                .main-content {
+                    margin-left: 0;
+                    width: 100%;
+                }
+                #sidebarToggleBtn {
+                    display: block !important;
+                }
+            }
+        </style>
     </head>
     <body>
-    <div class="container">
-        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom"><a href="/"
-                                                                                           class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-                <svg class="bi me-2" width="40" height="32" aria-hidden="true">
-                    <use xlink:href="#bootstrap"></use>
-                </svg>
-                <h1>VISION</h1> </a>
-            <ul class="nav nav-pills">
-                <li class="nav-item"><a href="{{ path('app_home') }}" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="{{ path('app_register') }}" class="nav-link">Register</a></li>
-                <li class="nav-item"><a href="{{ path('app_login') }}" class="nav-link">Login</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">About</a></li>
-            </ul>
-        </header>
-    </div>
-    {% block body %}{% endblock %}
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>VISION</h1>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+            <nav class="sidebar-nav">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a href="{{ path('app_home') }}" class="nav-link">
+                            <i class="bi bi-house"></i> Home
+                        </a>
+                    </li>
+                    {% if not app.user %}
+                        <li class="nav-item">
+                            <a href="{{ path('app_register') }}" class="nav-link">
+                                <i class="bi bi-person-plus"></i> Register
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ path('app_login') }}" class="nav-link">
+                                <i class="bi bi-box-arrow-in-right"></i> Login
+                            </a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a href="{{ path('app_faq') }}" class="nav-link">
+                            <i class="bi bi-question-circle"></i> FAQs
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ path('app_about') }}" class="nav-link">
+                            <i class="bi bi-info-circle"></i> About
+                        </a>
+                    </li>
+                    {% if app.user and app.user.isAdmin() %}
+                        <li class="nav-item">
+                            <a href="{{ path('admin_pins_index') }}" class="nav-link">
+                                <i class="bi bi-gear"></i> Admin: Manage Pins
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if app.user %}
+                        <li class="nav-item">
+                            <form action="{{ path('app_logout') }}" method="post" style="display:inline;">
+                                <button type="submit" class="nav-link btn btn-link">
+                                    <i class="bi bi-box-arrow-right"></i> Logout
+                                </button>
+                            </form>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+
+        <div class="main-content" id="mainContent">
+            <button class="btn btn-dark position-fixed" id="sidebarToggleBtn" style="top: 1rem; left: 1rem; z-index: 999;">
+                <i class="bi bi-list"></i>
+            </button>
+            {% block body %}{% endblock %}
+        </div>
+
+        <footer class="mt-auto">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <h5>About Us</h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac ante mollis quam tristique convallis.</p>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <h5>Quick Links</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="{{ path('app_home') }}" class="text-decoration-none text-white">Home</a></li>
+                            <li><a href="{{ path('app_faq') }}" class="text-decoration-none text-white">FAQs</a></li>
+                            <li><a href="{{ path('app_about') }}" class="text-decoration-none text-white">About</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <h5>Follow Us</h5>
+                        <ul class="list-inline social-icons">
+                            <li class="list-inline-item"><a href="#" class="text-white"><i class="bi bi-facebook"></i></a></li>
+                            <li class="list-inline-item"><a href="#" class="text-white"><i class="bi bi-twitter"></i></a></li>
+                            <li class="list-inline-item"><a href="#" class="text-white"><i class="bi bi-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <hr class="mb-4">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <p>&copy; 2023 VisionDB. All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <script src="{{ asset('js/sidebar.js') }}"></script>
     </body>
 </html>

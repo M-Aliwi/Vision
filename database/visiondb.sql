@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 21 mei 2025 om 12:57
+-- Gegenereerd op: 23 mei 2025 om 10:29
 -- Serverversie: 10.4.32-MariaDB
 -- PHP-versie: 8.2.12
 
@@ -76,14 +76,10 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`id`, `url`, `discription`) VALUES
-(1, 'img/bentleygrey.png', 'grey Bentley'),
-(2, 'img/benzinteriourwhite.png', 'Mercedes Benz'),
-(5, 'img/blackrolls.png', 'Rolls Royce'),
-(6, 'img/blackscat.png', 'SRT scatpack'),
-(7, 'img/brownleatherinterour.png', 'brown interiour'),
-(8, 'img/corvette.png', 'corvette'),
-(10, 'img/custominteriour.png', 'drift car interiour'),
-(11, 'img/rs5.png', 'rs5');
+(17, 'img/683027c97f07c.jpg', 'tt'),
+(18, 'img/6830289503a29.jpg', 'tabun dymek'),
+(19, 'img/683028b779ff7.jpg', 'ba'),
+(20, 'img/6830306a0144e.jpg', 'aa');
 
 -- --------------------------------------------------------
 
@@ -103,7 +99,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `email`, `roles`, `password`) VALUES
-(1, 'berrencetoadi@gmail.com', '[]', '$2y$13$WLnr4NkPAlxlQPnkOL.EzuzwCRHpIuAbrPU0PyIiO0fHivzxkNqKa');
+(1, 'berrencetoadi@gmail.com', '[]', '$2y$13$WLnr4NkPAlxlQPnkOL.EzuzwCRHpIuAbrPU0PyIiO0fHivzxkNqKa'),
+(2, '123123@gmail.com', '[]', '$2y$13$5vaIptEKSfr3/Vt7EaTvp.QsKCw/m./GlmI8xoBqlc8GAKFOmRXrq'),
+(3, '12312@gmail.com', '[\"ROLE_ADMIN\",\"ROLE_USER\"]', '$2y$13$YmmCk9y/50p2fxb7ki89GefZtkTh3UW80x3NpbcPx/49dRbkoV/t6');
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -151,13 +149,13 @@ ALTER TABLE `messenger_messages`
 -- AUTO_INCREMENT voor een tabel `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT voor een tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

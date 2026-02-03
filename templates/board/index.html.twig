@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Boards | Pinterest Clone{% endblock %}
+
+{% block body %}
+    <div style="max-width: 700px; margin: 2em auto;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h2>My Boards</h2>
+            <a href="{{ path('board_new') }}" class="btn btn-success">+ Create Board</a>
+        </div>
+        <ul class="list-group mt-3">
+            {% for board in boards %}
+                <li class="list-group-item">
+                    <a href="#">{{ board.name }}</a>
+                </li>
+            {% else %}
+                <li class="list-group-item">No boards found.</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %} 

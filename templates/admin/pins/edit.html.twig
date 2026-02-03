@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Pin | Admin{% endblock %}
+
+{% block body %}
+    <h2>Edit Pin</h2>
+    <div style="max-width: 400px; margin: 2em auto;">
+        {{ form_start(form) }}
+            {{ form_row(form.discription) }}
+            {{ form_row(form.image) }}
+            <button class="btn btn-primary">Save Changes</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %} 

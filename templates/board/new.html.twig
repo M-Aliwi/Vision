@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create Board | Pinterest Clone{% endblock %}
+
+{% block body %}
+    <h2>Create a New Board</h2>
+    <div style="max-width: 400px; margin: 2em auto;">
+        {{ form_start(form) }}
+            {{ form_row(form.name) }}
+            <button class="btn btn-primary">Create Board</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %} 
